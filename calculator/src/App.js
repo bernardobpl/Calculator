@@ -4,55 +4,48 @@ import './App.css';
 
 
 function App() {
+  const btnnumbers = [];
+  ['1','2','3','4','5','6','7','8','9','0','.'].forEach(num => {
+    btnnumbers.push(
+      <button 
+        value = {`${num}`}
+        key = {num}
+        className = {`btn btn${num}`}
+        onClick = {e => setFocusdig(focusdigits+e.target.value)}
+      > 
+        {num} 
+      </button>);
+  });
 
-
-  const [digits, setDigits] = useState(0);
-
-  return (
+  return (        
     <div className="App">
 
-      <section>
+      <div className="calculator">
 
-        <div className="display">
-          <input readOnly value={digits}/>
+        <input className="display" readOnly value={focusdigits}/>
+
+        <div className="keyboard-main">
+
+          <div className="keyboard-clear">
+            <button className="btn" value="C" id="btnC"> C </button>
+            <button className="btn" value="AC" id="btnAC"> AC </button>
+          </div>
+
+          <div className="keyboard-digits"> 
+            {btnnumbers} 
+            <button className="btn" value="=" onClick={e => handleOperation(e)}> = </button>
+          </div>
+
+          <div className="keyboard-op">
+            <button className="btn" value="sum" onClick={e => handleOperation(e)}> + </button>
+            <button className="btn" value="sub"> - </button>
+            <button className="btn" value="times"> * </button>
+            <button className="btn" value="divide"> / </button>
+          </div>
+
         </div>
 
-        <table>
-          <tr>
-            <td><button value="C"> C </button></td>
-            <td><button value="AC" id="AC"> AC </button></td>
-            <td><button value="*"> * </button></td>
-            <td><button value="/"> / </button></td>
-          </tr>
-
-          <tr>
-            <td><button value="1"> 1 </button></td>
-            <td><button value="2"> 2 </button></td>
-            <td><button value="3"> 3 </button></td>
-            <td><button value="+"> + </button></td>
-          </tr>
-
-          <tr>
-            <td><button value="4"> 4 </button></td>
-            <td><button value="5"> 5 </button></td>
-            <td><button value="6"> 6 </button></td>
-            <td><button value="-"> - </button></td>
-          </tr>
-          
-          <tr>
-            <td><button value="7"> 7 </button></td>
-            <td><button value="8"> 8 </button></td>
-            <td><button value="9"> 9 </button></td>
-            <td rowspan="2"><button value="="> = </button></td>
-          </tr>
-
-          <tr>
-            <td colspan="2"><button value="0"> 0 </button></td>
-            <td><button value="."> . </button></td>
-          </tr>
-        </table>
-
-      </section>
+      </div>
     </div>
   );
 }
